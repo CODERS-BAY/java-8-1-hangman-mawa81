@@ -1,22 +1,22 @@
 # Java 
 
-## Stack
+## Hangman
 
-### Java 7.1
+### Java 8.1
 
-Implementiere einen IntStack! Ein Stack ist ein Stapel, der immer die Dinge zuerst abarbeitet, die er zuletzt bekommen hat nach dem `Last in first out` Prinzip.
-Die Klasse Stack sollte folgende Methoden haben: 
-* void push(int newElement) 
-    * fügt ein neues Element oben in den Stack ein
-* int size()
-    * gibt die Anzahl der Elemente im Stack  zurück
-* int pop()
-    * gibt das letzte Elemente des Stacks zurück und entfernt dieses vom Stack
-* int peek()
-    * gibt das letzte Elemente des Stacks zurück ohne den Stack zu modifizieren
-* int[] pop(int n)
-    * gibt die letzten n Elemente des Stacks zurück und entfernt diese vom Stack 
-    
-Wird auf einen leeren Stack `pop() oder peek()` aufgerufen sollte eine `StackTooSmallException` geworfen werden. 
+Implementiere ein Hangman Spiel für die Java Console! 
+Bitte den User um die Eingabe eines Wortes. 
+Schreib für jeden Buchstaben im Wort ein * auf die Konsole um dem Ratenden zu zeigen wieviele Stellen das Wort hat. 
+Solange das Männchen noch nicht hängt, bitte den Ratenden um eine Buchstaben Eingabe, 
+stimmt die Eingabe sollte der Buchstabe an allen Stellen im Wort angezeigt werden,
+stimmt sie nicht sollte das Männchen dem Hängen einen Schritt näher gebracht werden.
 
-Leg in der Main Methode einen Stack an und schreib ein paar Beispiel-Verwendungen.  
+ASCII Art inspiration:
+      _______
+     |/      |
+     |      (_)
+     |      \|/
+     |       |
+     |      / \
+     |
+  ___|___
