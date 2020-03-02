@@ -12,6 +12,7 @@ stimmt die Eingabe sollte der Buchstabe an allen Stellen im Wort angezeigt werde
 stimmt sie nicht sollte das Männchen dem Hängen einen Schritt näher gebracht werden.
 
 ASCII Art inspiration:
+```
       _______
      |/      |
      |      (_)
@@ -20,3 +21,4 @@ ASCII Art inspiration:
      |      / \
      |
   ___|___
+```
