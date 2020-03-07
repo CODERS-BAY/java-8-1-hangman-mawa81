@@ -41,35 +41,20 @@ public class Main {
                 System.out.println("      " + String.valueOf(guess).toUpperCase() + " is the correct word!!!");
                 System.out.println("\n\tYOU WIN!!! GRATULATIONS!!!!");
                 System.out.println("\nWanna play a new Game? ([y]es,[n]o): ");
-                Scanner scan = new Scanner(System.in);
-                String newStartOrExit = String.valueOf(scan.next().charAt(0));
-                if (newStartOrExit.equals("y")) {
-                    countTrys = maxTrys;
-                    countFails = 0;
-                    hangMan = getHangManDesignPattern();
-                    word = getWordFromConsoleInput();
-                    guess = getGuessAsStars(word).toCharArray();
-                } else if (newStartOrExit.equals("n")) {
-                    System.out.println("Bye, Bye!");
-                    System.exit(0);
-                }
+                NewStartorExitDialog newStartorExitDialog = new NewStartorExitDialog(maxTrys, countTrys, countFails, hangMan, word, guess).invoke();
+
             } else {
                 System.out.println("\n\tGAME OVER");
                 System.out.println("\nWanna play a new Game? ([y]es,[n]o): ");
-                Scanner scan = new Scanner(System.in);
-                String newStartOrExit = String.valueOf(scan.next().charAt(0));
-                if (newStartOrExit.equals("y")) {
-                    countTrys = maxTrys;
-                    countFails = 0;
-                    hangMan = getHangManDesignPattern();
-                    word = getWordFromConsoleInput();
-                    guess = getGuessAsStars(word).toCharArray();
-                } else if (newStartOrExit.equals("n")) {
-                    System.out.println("Bye, Bye!");
-                    System.exit(0);
-                }
+                NewStartorExitDialog newStartorExitDialog = new NewStartorExitDialog(maxTrys, countTrys, countFails, hangMan, word, guess).invoke();
+
             }
         }
+    }
+
+    private static void exitGame() {
+        System.out.println("Bye, Bye!");
+        System.exit(0);
     }
 
     private static void updateHangmanOnFails(List<String> hangMan, int countFails) {
@@ -168,5 +153,58 @@ public class Main {
         for (char element : intro)
             System.out.println(" ".repeat(count += 5) + element);
         System.out.println();
+    }
+
+    private static class NewStartorExitDialog {
+        private int maxTrys;
+        private int countTrys;
+        private int countFails;
+        private List<String> hangMan;
+        private String word;
+        private char[] guess;
+
+        public NewStartorExitDialog(int maxTrys, int countTrys, int countFails, List<String> hangMan, String word, char... guess) {
+            this.maxTrys = maxTrys;
+            this.countTrys = countTrys;
+            this.countFails = countFails;
+            this.hangMan = hangMan;
+            this.word = word;
+            this.guess = guess;
+        }
+
+        public int getCountTrys() {
+            return countTrys;
+        }
+
+        public int getCountFails() {
+            return countFails;
+        }
+
+        public List<String> getHangMan() {
+            return hangMan;
+        }
+
+        public String getWord() {
+            return word;
+        }
+
+        public char[] getGuess() {
+            return guess;
+        }
+
+        public NewStartorExitDialog invoke() {
+            Scanner scan = new Scanner(System.in);
+            String newStartOrExit = String.valueOf(scan.next().charAt(0));
+            if (newStartOrExit.equals("y")) {
+                countTrys = maxTrys;
+                countFails = 0;
+                hangMan = getHangManDesignPattern();
+                word = getWordFromConsoleInput();
+                guess = getGuessAsStars(word).toCharArray();
+            } else if (newStartOrExit.equals("n")) {
+                exitGame();
+            }
+            return this;
+        }
     }
 }
