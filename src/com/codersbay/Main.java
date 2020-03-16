@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         int maxFails = 10;
-        int maxTrys = 15;
+        int maxTrys = 20;
         int countTrys = maxTrys;
         int countFails = 0;
 
@@ -21,25 +21,31 @@ public class Main {
         while (true) {
             drawThisDesignPattern(hangMan);
             if (countTrys > 0 && countFails < maxFails && !String.valueOf(guess).equals(word)) {
-                System.out.println("Word: " + String.valueOf(guess).toUpperCase() + "\t\t" + "Trys left: " + countTrys);
+                System.out.println("Word: " + String.valueOf(guess).toLowerCase() + "\t\t" + "Trys left: " + countTrys);
                 String guessCharacter = getGuessCharacter();
                 countTrys--;
 
                 if (word.contains(guessCharacter) && !String.valueOf(guess).contains(guessCharacter)) {
                     writeGuessedCharacterToGuessCharArray(word, guess, guessCharacter);
-                    System.out.println("\nExcellent! You have found a letter!");
+                    System.out.println("\t\t\t\t\t\t***************************************");
+                    System.out.println("\t\t\t\t\t\t* Excellent! You have found a letter! *");
+                    System.out.println("\t\t\t\t\t\t***************************************");
 
                 } else if (String.valueOf(guess).contains(guessCharacter)) {
                     System.out.println("\nHey! You have already found this letter!");
                 } else {
                     countFails++;
                     updateHangmanOnFails(hangMan, countFails);
-                    System.out.println("\nSorry! Wrong letter!");
+                    System.out.println("\t\t\t\t\t\t\t\t\t************************");
+                    System.out.println("\t\t\t\t\t\t\t\t\t* Sorry! Wrong letter! *");
+                    System.out.println("\t\t\t\t\t\t\t\t\t************************");
                 }
 
             } else if (String.valueOf(guess).equals(word)) {
-                System.out.println("      " + String.valueOf(guess).toUpperCase() + " is the correct word!!!");
-                System.out.println("\n\tYOU WIN!!! GRATULATIONS!!!!");
+                System.out.println("        " + String.valueOf(guess).toLowerCase() + " is the correct word!!!");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t***********************************");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t*    YOU WIN!! GRATULATIONS!!!    *");
+                System.out.println("\t\t\t\t\t\t\t\t\t\t***********************************");
                 System.out.println("\nWanna play a new Game? ([y]es,[n]o): ");
                 Scanner scan = new Scanner(System.in);
                 String newStartOrExit = String.valueOf(scan.next().charAt(0));
@@ -50,12 +56,14 @@ public class Main {
                     word = getWordFromConsoleInput();
                     guess = getGuessAsStars(word).toCharArray();
                 } else if (newStartOrExit.equals("n")) {
-                    System.out.println("Bye, Bye!");
-                    System.exit(0);
+                    exitGame();
                 }
 
             } else {
-                System.out.println("\n\tGAME OVER");
+                System.out.println();
+                System.out.println("\t\t\t\t\t\t\t\t\t************************");
+                System.out.println("\t\t\t\t\t\t\t\t\t*       GAME OVER      *");
+                System.out.println("\t\t\t\t\t\t\t\t\t************************");
                 System.out.println("\nWanna play a new Game? ([y]es,[n]o): ");
                 Scanner scan = new Scanner(System.in);
                 String newStartOrExit = String.valueOf(scan.next().charAt(0));
@@ -66,8 +74,7 @@ public class Main {
                     word = getWordFromConsoleInput();
                     guess = getGuessAsStars(word).toCharArray();
                 } else if (newStartOrExit.equals("n")) {
-                    System.out.println("Bye, Bye!");
-                    System.exit(0);
+                    exitGame();
                 }
             }
         }
@@ -139,22 +146,17 @@ public class Main {
             if (word.charAt(i) == guessCharacter.charAt(0)) {
                 guess[i] = word.charAt(i);
             }
-
         }
     }
 
     private static String getGuessCharacter() {
         Scanner scan = new Scanner(System.in);
         System.out.print("\nGuess a letter: ");
-        return String.valueOf(scan.next().charAt(0));
+        return String.valueOf(scan.next().charAt(0)).toLowerCase();
     }
 
     private static String getGuessAsStars(String word) {
-        String guess = "";
-        for (char eachChar : word.toCharArray()) {
-            guess += "*";
-        }
-        return guess;
+        return "*".repeat(word.length());
     }
 
     private static String getWordFromConsoleInput() {
@@ -162,17 +164,17 @@ public class Main {
         String word = "";
         System.out.println("Please enter a word: ");
         if (!scan.hasNextInt()) {
-
-            word += scan.next();
+            word += scan.next().toLowerCase();
         }
         return word;
     }
 
     private static void introAnimation() {
         int count = 0;
-        char[] intro = "Hi! LET'S PLAY HANGMAN!".toCharArray();
-        for (char element : intro)
-            System.out.println(" ".repeat(count += 5) + element);
         System.out.println();
+        char[] intro = "Hi! LET'S PLAY HANGMAN!".toCharArray();
+        for (char element : intro) {
+            System.out.println(" ".repeat(count += 4) + element);
+        }
     }
 }
